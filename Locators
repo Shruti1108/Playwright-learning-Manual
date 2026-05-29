@@ -1,0 +1,193 @@
+Locators in PW - way to find and interact with webelements on page. 
+Basic Syntax: 
+page.locator('locator')
+
+:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::Types of locators :::::::::::::::::
+
+1. ********** CSS selector *********
+
+page.locator('.submit-button')        // by class
+page.locator('#username')             // by id
+page.locator('button')                // by tag
+page.locator('[type="submit"]')       // by attribute
+
+2. ********** Text **********
+page.locator('text=Login')            // exact text
+page.locator('text=Log')              // partial text
+
+3. ********** Xpath **********
+page.locator('//button[@type="submit"]')
+
+4. ********** getByRole **********
+-> built on top of locator. It is more smarter & readable and recommended 
+-> Allows locating elements by their ARIA role, ARIA attributes and accessible name.
+
+**ARAI - Set of special attributes added to the HTML tag to tell PW exactly what an element is(more info like button, radio,checkbox etc) and what it does regardless of tag. EX: arial-lable
+ARAI attributs helps us to find the failed locators in fastest way because it holds the metadata 
+
+
+
+roles allowed
+
+a. Alert & Dialog
+
+page.getByRole('alert')
+page.getByRole('alertdialog')
+page.getByRole('dialog')
+
+b. Application & Document Structure
+
+page.getByRole('application')
+page.getByRole('article')
+page.getByRole('document')
+page.getByRole('feed')
+page.getByRole('figure')
+page.getByRole('group')
+page.getByRole('none')
+page.getByRole('note')
+page.getByRole('presentation')
+page.getByRole('region')
+
+c.Text & Inline Semantics 
+
+page.getByRole('blockquote')
+page.getByRole('caption')
+page.getByRole('code')
+page.getByRole('definition')
+page.getByRole('deletion')
+page.getByRole('emphasis')
+page.getByRole('generic')
+page.getByRole('insertion')
+page.getByRole('math')
+page.getByRole('paragraph')
+page.getByRole('strong')
+page.getByRole('subscript')
+page.getByRole('superscript')
+page.getByRole('term')
+page.getByRole('time')
+page.getByRole('toolbar')
+page.getByRole('tooltip')
+
+d. Landmarks
+
+page.getByRole('banner')           // <header>
+page.getByRole('complementary')    // <aside>
+page.getByRole('contentinfo')      // <footer>
+page.getByRole('form')             // <form>
+page.getByRole('main')             // <main>
+page.getByRole('navigation')       // <nav>
+page.getByRole('search')
+
+e. Interactive Widgets
+
+page.getByRole('button')           // <button>
+page.getByRole('checkbox')         // <input type="checkbox">
+page.getByRole('combobox')         // <select>
+page.getByRole('link')             // <a>
+page.getByRole('radio')            // <input type="radio">
+page.getByRole('radiogroup')
+page.getByRole('searchbox')        // <input type="search">
+page.getByRole('slider')           // <input type="range">
+page.getByRole('spinbutton')       // <input type="number">
+page.getByRole('switch')
+page.getByRole('textbox')          // <input type="text">
+
+f. Menus
+
+page.getByRole('menu')
+page.getByRole('menubar')
+page.getByRole('menuitem')
+page.getByRole('menuitemcheckbox')
+page.getByRole('menuitemradio')
+
+g. Lists
+typescriptpage.getByRole('list')             // <ul>, <ol>
+page.getByRole('listbox')
+page.getByRole('listitem')         // <li>
+page.getByRole('option')           // <option>
+page.getByRole('directory')
+
+h. Tables & Grids
+
+page.getByRole('columnheader')     // <th>
+page.getByRole('grid')
+page.getByRole('gridcell')
+page.getByRole('row')              // <tr>
+page.getByRole('rowgroup')         // <thead>, <tbody>, <tfoot>
+page.getByRole('rowheader')
+page.getByRole('table')            // <table>
+
+i. Tabs
+
+page.getByRole('tablist')
+page.getByRole('tabpanel')
+
+j. Trees
+
+page.getByRole('treegrid')
+page.getByRole('treeitem')
+
+k. Headings & Images
+page.getByRole('heading')          // <h1> to <h6>
+page.getByRole('img')              // <img>
+
+l. Live Regions & Misc
+
+page.getByRole('marquee')
+page.getByRole('meter')            // <meter>
+page.getByRole('progressbar')      // <progress>
+page.getByRole('scrollbar')
+page.getByRole('separator')        // <hr>
+page.getByRole('status')
+page.getByRole('timer')
+
+**************************************************************************
+Most commonly used are
+
+button     <button>                    getByRole('button', { name: 'Submit' })
+link       <a>                         getByRole('link', { name: 'Home' })
+textbox    <input>                     getByRole('textbox', { name: 'Email' })
+heading    <h1>-<h6>                   getByRole('heading', { name: 'Welcome' })
+checkbox   <input type="checkbox">     getByRole('checkbox', { name: 'Remember me' })
+radio      <input type="radio">        getByRole('radio', { name: 'Male' })
+combobox   <select>                    getByRole('combobox', { name: 'Country' })
+dialog     <dialog>                    getByRole('dialog', { name: 'Confirm' })
+img        <img>                       getByRole('img', { name: 'Logo' })
+
+
+
+Key Feature 
+Lazy initialization: A locator doesn't find the element immediately. It only searches when you perform an action.
+This makes locator auto retrying, if element isnt there yet PW keeps trying until it appears or time out 
+
+A locator is a reusable, lazy pointer to an element. getByRole, getByText etc. 
+Are all just friendlier versions of the same concept — use them when you can, fall back to raw locator() when you need more control.
+
+**************************************************************************
+
+Othre locators [5]
+
+5. getByText() - Non-interactive text like paragraphs, spans, or divs.	
+page.getByText('Welcome to the Dashboard')
+
+6. getByLabel()	- Form inputs that have a connected <label> tag.	
+page.getByLabel('First Name')
+
+7. getByPlaceholder()- Input fields that have placeholder text inside them.	
+page.getByPlaceholder('Enter your email')
+
+8. getByAltText() - Images (<img> tags) using their alt attribute.	
+page.getByAltText('Company Logo')
+
+9. getByTestId() - The "Emergency" option. Use when nothing else is stable.	
+page.getByTestId('submit-button-id')
+
+
+
+***************************************************************************************************************************************************************************************************************************
+                                                        
+
+
+
+
+
