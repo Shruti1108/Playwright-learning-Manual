@@ -1,0 +1,28 @@
+Filters on locators
+
+Parten child relation 
+The .filter() method allows you to narrow down a list of elements based on what is inside them
+
+a. hasText - Simple text matching
+.filter({ hasText: "example" })
+
+b. has - Filter elements having a child with role/link
+.filter({ has: locator.getByRole('link', { name: 'xyz' }) })
+
+c. hasNot - Exclude elements having unwanted child
+.filter({ hasNot: locator.getByRole('link', { name: 'abc' }) })
+
+d. .and() operator - when we need to match both locators condition at the same time 
+page.locator('button').and(page.getByText('Submit'))
+
+locator chaining -  find element within element [use when need to find the child locator]
+page.locator('div').getByRole('button') 
+but .and find same element with 2 attribute
+
+e. .or operator - locator matches any of the element 
+page.locator('button').or(page.getByText('Login'))
+
+Usage 
+.and() -> When one locator is too broad and you need to narrow it down.
+.or() -> When the element might appear in different forms/texts. 
+chaining -> Need to find child
