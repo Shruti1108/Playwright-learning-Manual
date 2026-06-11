@@ -21,6 +21,7 @@ page.locator('//button[@type="submit"]')
 4. ********** getByRole **********
 -> built on top of locator. It is more smarter & readable and recommended 
 -> Allows locating elements by their ARIA role, ARIA attributes and accessible name.
+-> 82 roles available in total
 
 **ARAI - Set of special attributes added to the HTML tag to tell PW exactly what an element is(more info like button, radio,checkbox etc) and what it does regardless of tag. EX: arial-lable
 ARAI attributs helps us to find the failed locators in fastest way because it holds the metadata 
